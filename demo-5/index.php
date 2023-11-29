@@ -1,7 +1,8 @@
 
 <?php 
          
+$heading = 'Home';
 
 /* aca cargo la vista para ser mostrado el contenido */
 
-require "index.view.php";
+require "views/index.view.php";
