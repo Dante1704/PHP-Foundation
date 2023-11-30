@@ -6,9 +6,12 @@ require'functions.php';
 /* require'router.php'; */
 require'Database.php';
 
-$db = new Database();
+$config = require('config.php');
+
+$db = new Database($config['database']);
 
 /* ferchAll() me trae todos los resultados posibles, pero no es tan practico si solo quiero 1 */
+
 $posts = $db->query("select * from posts where id > 1")->fetchAll();  
 $post = $db->query("select * from posts where id > 1")->fetch();
 
