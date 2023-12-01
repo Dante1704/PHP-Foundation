@@ -7,7 +7,7 @@ $db = new Database($config['database']);
 
 $query = "select * from notes";
 
-$notes = $db->query($query)->fetchAll();
+$notes = $db->query($query)->get(); //ahora este metodo me trae todos las filas de una tabla
 
 $heading = 'My Notes';
 

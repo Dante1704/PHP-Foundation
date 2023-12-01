@@ -2,29 +2,44 @@
 
 <?php
 
-// connect to the database, and execute a query.
 class Database {
 
-    public $connection; //aca se guarda el string connection ni bien se instancia la clase gracias al constructor
+    public $connection; 
 
-    //este metodo se ejecuta ni bien se crea la instancia de esta clase
+    public $statement; //aca bindeo el PDO con esta variable, lo que me permite utilizarlo en cualquer lugar que necesito
+
     public function __construct($config, $username = 'root', $password = '') {
 
-        /* el proposito de http_build_query es hacer query strings */
         $dsn= 'mysql:' . http_build_query($config, '', ';'); //resultado : mysql:host=localhost;port=3306;dbname=demo5;...
         
-        /* nueva conexion a la db */ /*PDO::FETCH_ASSOC para que me muestre la respuesta en forma de assoc array*/
         $this->connection = new PDO($dsn, $username, $password, [PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_ASSOC]); 
     } 
    
-    public function query($query, $params = []) { //$params van para ser bindeados a la query, si los hay.
+    public function query($query, $params = []) {
         
-        /* preparacion y ejecucion de la query */
-        $statement = $this->connection->prepare($query);
+        $this->statement = $this->connection->prepare($query);
 
-        //aca puedo bindear los parametros dinamicos de una consulta sql para evitar inyeccion de codigo
-        $statement->execute($params); 
+        $this->statement->execute($params); 
         
-        return $statement;
+        return $this; //retorno el objeto en si
+    }
+
+    public function get() {
+        return $this->statement->fetchAll();
+    }
+
+    public function find() {
+        return $this->statement->fetch();
+    }
+
+    /* metodo para buscar una row de una tabla cualquiera, antes solo estaba preparado para buscar una nota */
+    public function findOrFail() {
+        $result = $this->find();
+        //aca tengo en cuenta si me trajo realmente una nota o no
+        if(! $result) {
+            abort(); //por defecto es el 404 y en este caso esta bien
+        } 
+
+        return $result;
     }
 };
