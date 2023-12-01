@@ -3,8 +3,8 @@
 <?php
 
 require'functions.php';
-require'router.php';
 require'Database.php';
+/* require'router.php'; */
 
 $config = require('config.php');
 
@@ -15,10 +15,10 @@ $db = new Database($config['database']);
 $id = $_GET['id']; 
 
 /* evitando sql inyection: se puede usar ? o :id pero luego al ejecutar la query le tengo que pasar [':id' => $id] */
-$query = "select * from posts where id = ?"; //
+$query = "select * from notes where user_id = ?"; //
 $post = $db->query($query, [$id])->fetch();
 
 /* fetchAll() me trae todos los resultados posibles, pero no es tan practico si solo quiero 1 */
 /* $posts = $db->query("select * from posts where id > 1")->fetchAll(); */  
 
-/* dd($post); */
+dd($post);

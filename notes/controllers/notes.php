@@ -1,10 +1,14 @@
 
 <?php 
 
-/* cuando se cargue la vista de about se va a utilizar el valor de esta variable dentro de la misma */
-$heading = 'Notes';
+$config = require('config.php');
 
+$db = new Database($config['database']);
 
-/* aca cargo la vista para ser mostrado el contenido */
+$query = "select * from notes where user_id = 3";
+
+$notes = $db->query($query)->fetchAll();
+
+$heading = 'My Notes';
 
 require "views/notes.view.php";
