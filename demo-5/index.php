@@ -10,11 +10,15 @@ $config = require('config.php');
 
 $db = new Database($config['database']);
 
-/* ferchAll() me trae todos los resultados posibles, pero no es tan practico si solo quiero 1 */
 
-$posts = $db->query("select * from posts where id > 1")->fetchAll();  
-$post = $db->query("select * from posts where id > 1")->fetch();
+/* $_GET superglobal que brinda info sobre la get request */
+$id = $_GET['id']; 
 
-foreach ($posts as $post) {
-   echo "<li>" . $post['title'] . "</li>";
-}
+/* evitando sql inyection: se puede usar ? o :id pero luego al ejecutar la query le tengo que pasar [':id' => $id] */
+$query = "select * from posts where id = ?"; //
+$post = $db->query($query, [$id])->fetch();
+
+/* fetchAll() me trae todos los resultados posibles, pero no es tan practico si solo quiero 1 */
+/* $posts = $db->query("select * from posts where id > 1")->fetchAll(); */  
+
+dd($post);
