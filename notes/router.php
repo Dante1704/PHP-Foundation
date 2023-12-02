@@ -1,24 +1,14 @@
 <?php
 
-/* parse_url($uri);  */
 
-$uri = parse_url($_SERVER['REQUEST_URI'])['path']; 
+$routes = require('routes.php');
 
 /* ----------ROUTING-------------- */
-
-/* declaro mis rutas en un associative array */
-$routes = [
-    '/' => 'controllers/index.php',
-    '/about' => 'controllers/about.php',
-    '/notes' => 'controllers/notes.php',
-    '/note' => 'controllers/note.php',
-    '/contact' => 'controllers/contact.php',
-];
 
 /* esta funcion me maneja el ruteo */
 
 function routeToController ($uri, $routes) {
-/* array_key_exists($key, $array) te dice si existe la key en el array */
+    /* array_key_exists($key, $array) te dice si existe la key en el array */
     /* si la ruta a la que quiero entrar existe, entro */
     if (array_key_exists($uri, $routes)) {
         require $routes[$uri];
@@ -34,4 +24,7 @@ function abort($code = 404) { //default value = a js
     die();
 };
 
+$uri = parse_url($_SERVER['REQUEST_URI'])['path']; 
+
+/* parse_url($uri);  */
 routeToController ($uri, $routes);
