@@ -16,7 +16,22 @@
                         <label for="body" class="block text-sm font-medium leading-6 text-gray-900">Note</label>
                         <div class="mt-2">
                             <!-- nunca dejar los inputs sin un nombre -->
-                            <textarea id="body" name="body" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                            <!-- es importante tener el atributo required, 
+                            pero no se puede depender exclusivamente de él.
+                            un usuario podria, por ejemplo, crear una row desde su cli-->
+                            <textarea 
+                                id="body" 
+                                name="body" 
+                                rows="3" 
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                required  
+                            > 
+                                <?= $_POST['body'] ?? ''?><!-- esta es la manera de evitar que se pierda el contenido escrito, si algo sale mal. Es una buena experiencia-->
+                            </textarea> 
+                            <!-- si hay algun error, que lo muestre -->
+                            <?php if (isset($errors['body'])) : ?>
+                                <p class="text-red-500 text-xs mt-2"><?= $errors['body']?></p>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
