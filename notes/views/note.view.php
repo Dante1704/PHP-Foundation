@@ -9,7 +9,8 @@
             <p>
                 <a href="/notes" class="text-blue-500 underline">go back...</a>
             </p>
-            <?= $note['body'] ?>
+            <!-- escaping untrusted input -->
+            <?= htmlspecialchars($note['body']) ?>
         </div>
     </main>
 
