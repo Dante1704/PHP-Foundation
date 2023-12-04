@@ -6,7 +6,7 @@
 const BASE_PATH = __DIR__ . '/../';
 
 /* no le puedo aplicar el helper porque en este punto todavia no fue creado */
-require BASE_PATH . 'functions.php';
+require BASE_PATH . 'Core/functions.php';
 
 /* require base_path('Response.php');
 require base_path('Database.php'); */
@@ -14,8 +14,14 @@ require base_path('Database.php'); */
 // con esta funcion autoloader puedo declarar instancias de classes que no hayan sido requeridas previamente
 // en este caso, las classes Database y Response
 spl_autoload_register(function ($class) {
-    require base_path("Core/{$class}.php");
+    // Core\Database -> Core/Database
+    /* 
+    DIRECTORY_SEPARATOR tiene en cuenta el que realmente es segun el OS, 
+    en windows es /
+    */
+    $class = str_replace('\\', DIRECTORY_SEPARATOR, $class ); //str_replace como replace de js
+    require base_path("{$class}.php");
 });
 
-require base_path('router.php');
+require base_path('Core/router.php');
 

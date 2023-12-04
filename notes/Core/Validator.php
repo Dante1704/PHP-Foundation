@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 /* esta es un clase validadora */
 /* clase no tiene un estado, no se hacen referencias a this, solo tiene metodos que se invocan directamente,
 y estos metodos son puros. Por lo tanto, los puedo declarar como static */

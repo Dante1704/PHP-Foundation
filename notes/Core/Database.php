@@ -1,6 +1,8 @@
-<!-- si el documento tiene una unica clase, por convencion va nombrado con mayuscula al principio Database.php -->
-
 <?php
+
+namespace Core;
+
+use PDO;
 
 class Database {
 

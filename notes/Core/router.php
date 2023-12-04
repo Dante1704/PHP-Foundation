@@ -1,7 +1,7 @@
 <?php
 
 
-$routes = require('routes.php');
+$routes = require base_path('routes.php');
 
 /* ----------ROUTING-------------- */
 
@@ -11,7 +11,7 @@ function routeToController ($uri, $routes) {
     /* array_key_exists($key, $array) te dice si existe la key en el array */
     /* si la ruta a la que quiero entrar existe, entro */
     if (array_key_exists($uri, $routes)) {
-        require $routes[$uri];
+        require base_path($routes[$uri]);
     } else {
         abort(); //en este caso la uso para responder cuando no encuetra una ruta
     }
@@ -20,7 +20,7 @@ function routeToController ($uri, $routes) {
 /* esta es la funcion que se va a ejecutar cuando algo sale mal */
 function abort($code = 404) { //default value = a js
     http_response_code($code); //asi se setea un codigo de respuesta
-    require "views/{$code}.php";
+    require base_path("views/{$code}.php");
     die();
 };
 

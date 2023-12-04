@@ -14,7 +14,11 @@ $heading = 'My Notes';
 require "views/notes/index.view.php";
  */
 
+ 
 //AHORA:
+
+use Core\Database;
+
 $config = require base_path('config.php');
 
 $db = new Database($config['database']);
