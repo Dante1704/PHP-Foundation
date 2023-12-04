@@ -1,6 +1,7 @@
 <!-- aca pongo todas las helpers functions  -->
-
 <?php 
+
+use Core\Response;
 
 function dd($value){
     echo "<pre>";

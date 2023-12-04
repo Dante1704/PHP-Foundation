@@ -2,7 +2,8 @@
 
 namespace Core;
 
-use PDO;
+use PDO; /* lo tengo que declarar asi para que funciones,
+ sino lo busca en este namespace porque asume \Core\PDO */
 
 class Database {
 

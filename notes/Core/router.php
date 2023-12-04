@@ -1,8 +1,5 @@
 <?php
 
-
-$routes = require base_path('routes.php');
-
 /* ----------ROUTING-------------- */
 
 /* esta funcion me maneja el ruteo */
@@ -24,6 +21,7 @@ function abort($code = 404) { //default value = a js
     die();
 };
 
+$routes = require base_path('routes.php');
 $uri = parse_url($_SERVER['REQUEST_URI'])['path']; 
 
 /* parse_url($uri);  */
