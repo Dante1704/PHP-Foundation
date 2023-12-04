@@ -1,5 +1,7 @@
 <?php
 
+require 'Validator.php';
+
 $config = require('config.php');
 $db = new Database($config['database']);
 
@@ -14,13 +16,20 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $error = []; //en esta variable se van a guardar los errores y luego van a ser mostrados en la view.
     //$_POST es un superglobal que me da informacion sobre la request POST en forma de associative array
     //strlen() me da el largo de un string
+
+    /* 
+    instancio la clase validator
+    $validator = new Validator(); 
+    ya no necesito instanciarla porque sus metodos son puros y no hay un uso de this. 
+    */
+
     //validacion de que haya cuerpo en el textarea
-    if(strlen($_POST['body']) === 0) { 
+    if(Validator::string($_POST['body'])) { //como es un static method lo puedo invocar asi
         $errors['body'] = 'A body is required';
     }
 
     //validacion de que cantidad maxima de caracteres
-    if(strlen($_POST['body']) > 500) { 
+    if(Validator::maxStringLength($_POST['body'])) { //como es un static method lo puedo invocar asi
         $errors['body'] = 'Max number of characteres reached. Max characters: 500.';
     }
 
