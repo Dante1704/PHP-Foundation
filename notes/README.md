@@ -1,0 +1,1 @@
+#### En la carpeta core estoy poniendo modulos que son genericos en la aplicacion, no son nada especificos. 

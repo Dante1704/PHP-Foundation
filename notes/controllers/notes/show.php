@@ -1,18 +1,19 @@
 
 <?php 
 
-$config = require('config.php');
+$config = require base_path('config.php');
 
 $db = new Database($config['database']);
 
-$heading = 'Note';
 
 $id = $_GET['id'];
 
 //esta query tiene el problema de que puedo estar trayendo notas que no son del current user
-$query = "select * from notes where id = :id";
+//$query = "select * from notes where id = :id";
 
-$note = $db->query($query, ['id' => $_GET['id']])->findOrFail();
+$note = $db->query("select * from notes where id = :id", [
+    'id' => $_GET['id']
+    ])->findOrFail();
  
 //en este caso estoy hardcodeando el user_id porque todavia no tengo hecha la authentication
 $currentUserId = 3;
@@ -21,4 +22,12 @@ $currentUserId = 3;
 authorize($note['user_id'] === $currentUserId);
 /* dd($note); */
 
-require "views/notes/show.view.php";
+//$heading = 'Note';
+//require "views/notes/show.view.php";
+
+
+view("notes/show.view.php", [
+    'heading' => 'Note',
+    'note' => $note,
+    'error' => $error,
+]);
