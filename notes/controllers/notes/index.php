@@ -11,4 +11,4 @@ $notes = $db->query($query)->get(); //ahora este metodo me trae todos las filas 
 
 $heading = 'My Notes';
 
-require "views/notes.view.php";
+require "views/notes/index.view.php";
