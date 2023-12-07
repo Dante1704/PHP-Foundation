@@ -1,5 +1,5 @@
 
-<?php 
+<?php
 
 use Core\Database;
 
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $note = $db->query("select * from notes where id = :id", [
         'id' => $_GET['id']
     ])->findOrFail();
- 
+
     authorize($note['user_id'] === $currentUserId);
 
     //todo verificado, asique borro
@@ -27,15 +27,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'id' => $_POST['id']
     ]);
 
+    //una vez borrada la nota, redirige a la ruta donde se muestran todas las notas
     header('location: /notes');
     exit();
-
 } else {
 
     $note = $db->query("select * from notes where id = :id", [
         'id' => $_GET['id']
     ])->findOrFail();
- 
 
     //aca tengo en cuenta si la nota le pertenece al current user, con el nuevo helper desarrollado
     authorize($note['user_id'] === $currentUserId);
@@ -48,5 +47,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'heading' => 'Note',
         'note' => $note,
     ]);
-
 }

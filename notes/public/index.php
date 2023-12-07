@@ -19,9 +19,21 @@ spl_autoload_register(function ($class) {
     DIRECTORY_SEPARATOR tiene en cuenta el que realmente es segun el OS, 
     en windows es /
     */
-    $class = str_replace('\\', DIRECTORY_SEPARATOR, $class ); //str_replace como replace de js
+    $class = str_replace('\\', DIRECTORY_SEPARATOR, $class); //str_replace como replace de js
     require base_path("{$class}.php");
 });
 
-require base_path('Core/router.php');
+/* require base_path('Core/router.php'); */
 
+//inicializo el Router
+$router = new \Core\Router();
+
+
+$routes = require base_path('routes.php');
+
+$uri = parse_url($_SERVER['REQUEST_URI'])['path'];
+
+//ahora entonces pregunto si existe un valor declarado en el input _method para la peticion de tipo POST
+$method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD']; // ?? igual que en js
+
+$router->route($uri, $method);

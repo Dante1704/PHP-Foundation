@@ -1,4 +1,4 @@
-<?php 
+<?php
 /* 
 $config = require('config.php');
 
@@ -13,7 +13,7 @@ $heading = 'My Notes';
 require "views/notes/index.view.php";
  */
 
- 
+
 //AHORA:
 
 use Core\Database;
