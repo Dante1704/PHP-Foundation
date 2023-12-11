@@ -7,8 +7,12 @@ porque ahora si tengo una ruta especifica para delete y otra para show
 
 use Core\Database;
 
-$config = require base_path('config.php');
-$db = new Database($config['database']);
+/*$config = require base_path('config.php');
+$db = new Database($config['database']); */
+
+use Core\App;
+
+$db = App::container()->resolve(Database::class); //Database::class es lo mismo que decir 'Core\Database'
 
 //en este caso estoy hardcodeando el user_id porque todavia no tengo hecha la authentication
 $currentUserId = 3;

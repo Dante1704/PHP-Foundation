@@ -25,9 +25,11 @@ spl_autoload_register(function ($class) {
 
 /* require base_path('Core/router.php'); */
 
+//responsable de inicializar la db
+require base_path('bootstrap.php');
+
 //inicializo el Router
 $router = new \Core\Router();
-
 
 $routes = require base_path('routes.php');
 
