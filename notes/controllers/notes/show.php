@@ -9,6 +9,28 @@ $db = new Database($config['database']);
 //en este caso estoy hardcodeando el user_id porque todavia no tengo hecha la authentication
 $currentUserId = 3;
 
+//AHORA
+$note = $db->query("select * from notes where id = :id", [
+    'id' => $_GET['id']
+])->findOrFail();
+
+//aca tengo en cuenta si la nota le pertenece al current user, con el nuevo helper desarrollado
+authorize($note['user_id'] === $currentUserId);
+//dd($note);
+
+//$heading = 'Note';
+//require "views/notes/show.view.php";
+
+view("notes/show.view.php", [
+    'heading' => 'Note',
+    'note' => $note,
+]);
+
+
+
+
+//ANTES
+/* 
 // por el momento tengo que asumir que uso "POST" para hacer delete
 // porque el form entiende solo de "POST" o "GET"
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -38,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     //aca tengo en cuenta si la nota le pertenece al current user, con el nuevo helper desarrollado
     authorize($note['user_id'] === $currentUserId);
-    /* dd($note); */
+    //dd($note);
 
     //$heading = 'Note';
     //require "views/notes/show.view.php";
@@ -48,3 +70,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'note' => $note,
     ]);
 }
+ */

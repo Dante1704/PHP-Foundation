@@ -24,4 +24,9 @@ $router->get('/contact', 'controllers/contact.php');
 
 $router->get('/notes', 'controllers/notes/index.php');
 $router->get('/note', 'controllers/notes/show.php');
-$router->get('/notes/create', 'controllers/create.php');
+$router->delete('/note', 'controllers/notes/destroy.php');
+
+//crear, te permite crear. Muestra el form de creacion
+$router->get('/notes/create', 'controllers/notes/create.php');
+//store, guarda el nuevo regitro y redirige. 
+$router->post('/notes', 'controllers/notes/store.php');
