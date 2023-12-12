@@ -3,9 +3,11 @@
 use Core\Database;
 use Core\Validator;
 
-$config = require base_path('config.php');
-$db = new Database($config['database']);
+/* $config = require base_path('config.php');
+$db = new Database($config['database']); */
+use Core\App;
 
+$db = App::container()->resolve(Database::class);
 //en esta variable se van a guardar los errores y luego van a ser mostrados en la view.
 $error = [];
 

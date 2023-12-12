@@ -17,11 +17,11 @@ require "views/notes/index.view.php";
 //AHORA:
 
 use Core\Database;
+/* $config = require base_path('config.php');
+$db = new Database($config['database']); */
+use Core\App;
 
-$config = require base_path('config.php');
-
-$db = new Database($config['database']);
-
+$db = App::container()->resolve(Database::class);
 $notes = $db->query("select * from notes")->get();
 
 
